@@ -28,3 +28,12 @@ export const otpVerify = async (body: OtpInfo) => {
 		return error;
 	}
 };
+
+export const editUser = async (id: string, body: UserInfo) => {
+	try {
+		const res = await axios.put(`${baseUrl}/editUser/${id}`, body);
+		return res?.data;
+	} catch (error) {
+		return error;
+	}
+};

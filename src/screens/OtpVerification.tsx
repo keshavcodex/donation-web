@@ -17,8 +17,8 @@ function OtpVerification() {
 
 		if (response?.data?.success) {
 			localStorage.removeItem('email');
-			localStorage.setItem('userInfo', JSON.stringify(response?.data));
-			dispatch(setUserInfo(response));
+			localStorage.setItem('userInfo', JSON.stringify(response?.data?.user));
+			dispatch(setUserInfo(response?.data?.user));
 			navigate('/');
 		} else {
 			alert('Invalid OTP code. Please try again.');

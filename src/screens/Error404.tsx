@@ -3,8 +3,11 @@ import React from 'react';
 import { Box, Typography, Button, Stack } from '@mui/material';
 import image404 from '../images/image404.png';
 import CustomButton from '../components/CustomButton';
+import { useNavigate } from 'react-router-dom';
 
 function Error404() {
+	const navigate = useNavigate();
+
 	return (
 		<Layout>
 			<Box
@@ -36,12 +39,10 @@ function Error404() {
 						unavailable or removed.
 					</Typography>
 					<Stack direction='row' spacing={2}>
-						<CustomButton variant='contained' href='/'>
+						<CustomButton variant='contained' onClick={() => navigate('/')}>
 							Take me home
 						</CustomButton>
-						<Button variant='outlined' href='/contact'>
-							Contact Us
-						</Button>
+						<Button variant='outlined'>Contact Us</Button>
 					</Stack>
 				</Box>
 			</Box>

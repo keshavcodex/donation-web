@@ -34,7 +34,7 @@ export default function MenuAppBar({ header }: any) {
 
 	const handleLogout = () => {
 		try {
-			localStorage.removeItem('userInfo');
+			localStorage.clear();
 			dispatch(logout());
 			navigate('/');
 		} catch (error) {

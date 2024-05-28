@@ -79,7 +79,7 @@ function Welcome() {
 							>
 								Welcome back
 								{userInfo &&
-									', ' + toTitleCase(userInfo?.user?.firstName) + '!'}
+									', ' + toTitleCase(userInfo?.firstName) + '!'}
 							</Typography>
 						</Grid>
 						<Grid item xs={12} md={4}>

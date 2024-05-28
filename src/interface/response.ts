@@ -11,9 +11,9 @@ export interface UserInfo {
 	firstName: string;
 	lastName: string;
 	email: string;
-	password: string;
-	confirmPassword: string;
 	phone: string;
+	password?: string;
+	confirmPassword?: string;
 }
 export interface OtpInfo {
 	email: string;

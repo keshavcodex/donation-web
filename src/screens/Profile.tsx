@@ -1,19 +1,33 @@
 import Layout from '../components/Layout';
-import { useState } from 'react';
-import { TextField, Button, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Button, Typography, Box, Stack } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { UserInfo } from '../interface/response';
+import CustomTextField from '../components/CustomTextField';
+import userAvatar from '../images/user-avatar.png';
+import { editUser } from '../services/authApi';
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
 	const [editMode, setEditMode] = useState(false);
-	const [userData, setUserData] = useState({
-		name: '',
-		email: ''
-		// Add other user details here (e.g., bio, location)
-	});
+	const navigate = useNavigate();
 
-	// Function to handle user data changes
-	const handleInputChange = (event: any) => {
-		setUserData({ ...userData, [event.target.name]: event.target.value });
-	};
+	const userInfo = useSelector((state: any) => state?.user?.userInfo);
+	const isLoading = userInfo === null;
+
+	const [firstName, setFirstName] = useState(userInfo?.firstName);
+	const [lastName, setLastName] = useState(userInfo?.lastName);
+	const [email, setEmail] = useState(userInfo?.email);
+	const [phone, setPhone] = useState(userInfo?.phone);
+
+	useEffect(() => {
+		if (!isLoading && userInfo) {
+			setFirstName(userInfo.firstName);
+			setLastName(userInfo.lastName);
+			setEmail(userInfo.email);
+			setPhone(userInfo.phone);
+		}
+	}, [isLoading, userInfo]); // Dependency array ensures updates only when necessary
 
 	// Function to toggle edit mode
 	const toggleEditMode = () => {
@@ -21,47 +35,111 @@ function Profile() {
 	};
 
 	// Function to save changes (replace with your actual data saving logic)
-	const saveChanges = () => {
+	const saveChanges = async () => {
 		// Implement logic to save updated user data
-		console.log('Saving user data:', userData); // For demonstration purposes
-		setEditMode(false); // Close edit mode after saving
+		const editedUser = {
+			firstName,
+			lastName,
+			email,
+			phone,
+			password: 'asdfasdf'
+		};
+
+		try {
+			const response = await editUser(userInfo.id, editedUser);
+			console.log('response of edit profile', response);
+			setEditMode(false);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
-		<Layout header={'Profile'}>
+		<Layout header={editMode ? 'Edit profile' : 'Profile'}>
 			{editMode ? (
-				<form>
-					<TextField
-						label='Name'
-						name='name'
-						value={userData.name}
-						onChange={handleInputChange}
-						fullWidth
-						margin='normal'
-					/>
-					<TextField
-						label='Email'
-						name='email'
-						type='email'
-						value={userData.email}
-						onChange={handleInputChange}
-						fullWidth
-						margin='normal'
-					/>
-					{/* Add TextField components for other user details here */}
-					<Button variant='contained' type='button' onClick={saveChanges}>
-						Save Changes
-					</Button>
-				</form>
+				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+					<Box
+						sx={{
+							display: 'flex',
+							flexDirection: 'column',
+							maxWidth: 400,
+							width: '100%',
+							mx: 2
+						}}
+					>
+						{/* <Typography sx={{ fontFamily: 'monospace', fontSize: 20 }}>
+							Edit profile
+						</Typography> */}
+						<img
+							src={userAvatar}
+							alt='User avatar'
+							style={{
+								width: '100px',
+								borderRadius: '50%',
+								alignSelf: 'center'
+							}}
+						/>
+						<Stack direction={'row'} gap={1}>
+							<CustomTextField
+								id={'firstName'}
+								label={'First Name'}
+								value={firstName}
+								setValue={setFirstName}
+							/>
+							<CustomTextField
+								id={'lastName'}
+								label={'Last Name'}
+								value={lastName}
+								setValue={setLastName}
+							/>
+						</Stack>
+						<CustomTextField
+							id={'phone'}
+							label={'Phone'}
+							value={phone}
+							setValue={setPhone}
+						/>
+						<CustomTextField
+							id={'email'}
+							label={'Email'}
+							value={email}
+							setValue={setEmail}
+						/>
+						{/* Add TextField components for other user details here */}
+						<Button variant='contained' type='button' onClick={saveChanges}>
+							Save Changes
+						</Button>
+					</Box>
+				</Box>
 			) : (
-				<div>
-					<Typography variant='body1'>Name: {userData.name}</Typography>
-					<Typography variant='body1'>Email: {userData.email}</Typography>
-					{/* Display other user details here */}
-					<Button variant='outlined' type='button' onClick={toggleEditMode}>
+				<Box mt={2}>
+					<img
+						src={userAvatar}
+						alt='User avatar'
+						style={{
+							width: '100px',
+							borderRadius: '50%',
+							alignSelf: 'center'
+						}}
+					/>
+					<Typography variant='h4' my={2}>
+						{firstName + ' ' + lastName}
+					</Typography>
+					<Typography variant='body1' my={2}>
+						{email}
+					</Typography>
+					<Typography variant='body1' my={2}>
+						{phone}
+					</Typography>
+
+					<Button
+						variant='outlined'
+						type='button'
+						onClick={() => navigate('edit')}
+					>
 						Edit Profile
 					</Button>
-				</div>
+				</Box>
 			)}
 		</Layout>
 	);

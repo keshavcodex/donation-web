@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, CircularProgress, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 import CustomTextField from '../components/CustomTextField';
 import CustomButton from '../components/CustomButton';
@@ -31,10 +31,10 @@ function Register() {
 		if (user.phone.length < 10) {
 			errors.push('Please enter a valid phone number.');
 		}
-		if (user.password.length < 6) {
+		if (user?.password && user?.password.length < 6) {
 			errors.push('Password must be at least 6 characters.');
 		}
-		if (user.password !== user.confirmPassword) {
+		if (user?.password !== user?.confirmPassword) {
 			errors.push('Password mismatch with Confirm Password.');
 		}
 		if (errors.length > 0) {
@@ -76,9 +76,6 @@ function Register() {
 	return (
 		<Layout>
 			<Box mt={2} component='form' noValidate autoComplete='off'>
-				<Typography sx={{ fontFamily: 'monospace', fontSize: 20 }}>
-					Register to donation app
-				</Typography>
 				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 					<Box
 						sx={{
@@ -89,47 +86,51 @@ function Register() {
 							mx: 2
 						}}
 					>
-						<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+						<Typography sx={{ fontFamily: 'monospace', fontSize: 20 }}>
+							Empower Wildlife Conservation with Your Registration
+						</Typography>
+						<Stack direction={'row'} gap={2}>
 							<CustomTextField
-								id={'First Name'}
+								id={'firstName'}
 								label={'First Name'}
 								value={firstName}
 								setValue={setFirstName}
 							/>
 							<CustomTextField
-								id={'Last Name'}
+								id={'lastName'}
 								label={'Last Name'}
 								value={lastName}
 								setValue={setLastName}
 							/>
-						</Box>
+						</Stack>
+
 						<CustomTextField
-							id={'Phone'}
+							id={'phone'}
 							label={'Phone'}
 							value={phone}
 							setValue={setPhone}
 						/>
 						<CustomTextField
-							id={'Email'}
+							id={'email'}
 							label={'Email'}
 							value={email}
 							setValue={setEmail}
 						/>
 						<IconTextField
-							id={'Password'}
+							id={'password'}
 							label={'Password'}
 							value={password}
 							setValue={setPassword}
 						/>
 						<IconTextField
-							id={'Confirm Password'}
+							id={'confirmPassword'}
 							label={'Confirm Password'}
 							value={confirmPassword}
 							setValue={setConfirmPassword}
 						/>
 						{isRegistering ? (
 							<Box>
-								<CircularProgress color='success' />
+								<CircularProgress />
 							</Box>
 						) : (
 							<CustomButton onClick={handleRegister}>Register</CustomButton>

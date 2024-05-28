@@ -8,10 +8,9 @@ import { toTitleCase } from '../utils/helper';
 import Layout from '../components/Layout';
 
 const StyledHomeImage = styled('img')(({ theme }) => ({
-	width: '100%', // Adjust image width as needed
+	width: '120%', // Adjust image width as needed
 	height: 'auto',
 	objectFit: 'cover',
-	borderRadius: theme.shape.borderRadius, // Apply theme's border radius
 	filter: 'brightness(0.8)', // Adjust image brightness for better text readability
 	[theme.breakpoints.down('md')]: {
 		// Responsive adjustments for smaller screens
@@ -44,14 +43,17 @@ function Home() {
 			>
 				<Container maxWidth='lg'>
 					<Grid container spacing={2} alignItems='stretch'>
-						<Grid item xs={12} md={6}>
+						<Grid item xs={12} md={5}>
+							<StyledHomeImage src={wildlifeImage} alt='Donation cause' />
+						</Grid>
+						<Grid item xs={12} md={7}>
 							<Typography
 								variant='h4'
 								component='h3'
 								align='center'
 								gutterBottom
 							>
-								{userInfo && 'Hello, ' + toTitleCase(userInfo?.user?.firstName)}
+								{userInfo && 'Hello, ' + toTitleCase(userInfo?.firstName)}
 							</Typography>
 							<Typography
 								variant='h2'
@@ -72,9 +74,6 @@ function Home() {
 							<Stack direction='row' spacing={2} justifyContent='center'>
 								<CustomButton onClick={handleDonation}>Donate Now</CustomButton>
 							</Stack>
-						</Grid>
-						<Grid item xs={12} md={6}>
-							<StyledHomeImage src={wildlifeImage} alt='Donation cause' />
 						</Grid>
 					</Grid>
 				</Container>

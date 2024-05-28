@@ -27,9 +27,9 @@ function Layout({ header, children }: any) {
 	const colors = createTheme({
 		palette: {
 			primary: {
-				main: isDarkMode ? '#232423' : '#117811',
+				main: isDarkMode ? '#282828' : '#117811',
 				light: isDarkMode ? '#0d5c0d' : '#2f9e2f',
-				dark: isDarkMode ? '#2f332f' : '#0d5c0d',
+				dark: isDarkMode ? '#353535' : '#0d5c0d',
 				contrastText: '#fff'
 			}
 		}

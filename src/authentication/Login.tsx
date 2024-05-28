@@ -7,6 +7,7 @@ import { login } from '../services/authApi';
 import { useDispatch } from 'react-redux';
 import { setUserInfo } from '../store/store';
 import Layout from '../components/Layout';
+import IconTextField from '../components/IconTextField';
 
 function Login() {
 	const navigate = useNavigate();
@@ -21,8 +22,8 @@ function Login() {
 		try {
 			const response = await login({ email, password });
 			if (response?.success) {
-				localStorage.setItem('userInfo', JSON.stringify(response));
-				dispatch(setUserInfo(response));
+				localStorage.setItem('userInfo', JSON.stringify(response?.user));
+				dispatch(setUserInfo(response?.user));
 				navigate('/welcome');
 			} else {
 				window.alert('Login failed, Please confirm email & password.');
@@ -61,8 +62,8 @@ function Login() {
 							value={email}
 							setValue={setEmail}
 						/>
-						<CustomTextField
-							id={'Password'}
+						<IconTextField
+							id={'password'}
 							label={'Password'}
 							value={password}
 							setValue={setPassword}

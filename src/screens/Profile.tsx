@@ -2,7 +2,6 @@ import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
 import { Button, Typography, Box, Stack } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { UserInfo } from '../interface/response';
 import CustomTextField from '../components/CustomTextField';
 import userAvatar from '../images/user-avatar.png';
 import { editUser } from '../services/authApi';
@@ -28,11 +27,6 @@ function Profile() {
 			setPhone(userInfo.phone);
 		}
 	}, [isLoading, userInfo]); // Dependency array ensures updates only when necessary
-
-	// Function to toggle edit mode
-	const toggleEditMode = () => {
-		setEditMode(!editMode);
-	};
 
 	// Function to save changes (replace with your actual data saving logic)
 	const saveChanges = async () => {

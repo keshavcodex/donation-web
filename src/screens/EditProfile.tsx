@@ -1,12 +1,10 @@
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
-import { Button, Typography, Box, Stack } from '@mui/material';
+import { Button,  Box, Stack } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { UserInfo } from '../interface/response';
 import CustomTextField from '../components/CustomTextField';
 import userAvatar from '../images/user-avatar.png';
 import { editUser } from '../services/authApi';
-import { useNavigate } from 'react-router-dom';
 import { setUserInfo } from '../store/store';
 
 const EditProfile = () => {

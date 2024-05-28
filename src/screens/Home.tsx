@@ -13,7 +13,6 @@ const StyledHomeImage = styled('img')(({ theme }) => ({
 	objectFit: 'cover',
 	filter: 'brightness(0.8)', // Adjust image brightness for better text readability
 	[theme.breakpoints.down('md')]: {
-		// Responsive adjustments for smaller screens
 		width: '100%' // Make image full width on smaller screens
 	}
 }));

@@ -1,20 +1,14 @@
-import React from 'react';
 import {
 	BrowserRouter as Router,
 	Routes,
 	Route,
-	useNavigate,
-	Navigate
 } from 'react-router-dom';
 import Login from '../authentication/Login';
 import Register from '../authentication/Register';
 import Home from '../screens/Home';
-import { useSelector } from 'react-redux';
 import Welcome from '../screens/welcome';
 import Error404 from '../screens/Error404';
 import OtpVerification from '../screens/OtpVerification';
-import { Box } from '@mui/material';
-import MenuAppBar from '../components/MenuAppBar';
 import Profile from '../screens/Profile';
 
 function NavigationPage() {

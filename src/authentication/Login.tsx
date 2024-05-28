@@ -1,6 +1,5 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import themeModal from '../theme/theme';
+import { useState } from 'react';
 import CustomTextField from '../components/CustomTextField';
 import CustomButton from '../components/CustomButton';
 import { useNavigate } from 'react-router-dom';
@@ -10,26 +9,12 @@ import { setUserInfo } from '../store/store';
 import Layout from '../components/Layout';
 
 function Login() {
-	const theme = themeModal();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [isLogging, setIsLogging] = useState(false);
-
-	useEffect(() => {
-		checkUserInLocal();
-	}, []);
-
-	const checkUserInLocal = () => {
-		try {
-			const user = localStorage.getItem('userInfo');
-			if (user != null) dispatch(setUserInfo(JSON.parse(user || '')));
-		} catch (error) {
-			console.log(error);
-		}
-	};
 
 	const handleLogin = async () => {
 		setIsLogging(true);

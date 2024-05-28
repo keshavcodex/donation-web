@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
-import { Box, Container, Typography, Button, Grid, Stack } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Box, Container, Typography, Grid, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import userAvatar from '../images/user-avatar.png';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from '../components/CustomButton';
 import { getDonationsByUser } from '../services/apiServices'; // Assuming a service to fetch user donations
-import themeModal from '../theme/theme';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { toTitleCase } from '../utils/helper';
-import { setUserInfo } from '../store/store';
 import Layout from '../components/Layout';
 
 const StyledWelcomeSection = styled('section')(({ theme }) => ({
@@ -22,46 +20,32 @@ const StyledWelcomeSection = styled('section')(({ theme }) => ({
 	minHeight: '400px' // Set minimum height as needed
 }));
 
-const StyledDonationCard = styled('div')(({ theme }) => ({
-	display: 'flex',
-	flexDirection: 'column',
-	alignItems: 'center',
-	padding: theme.spacing(3),
-	margin: theme.spacing(2),
-	border: `1px solid ${theme.palette.divider}`,
-	borderRadius: theme.shape.borderRadius,
-	maxWidth: '400px', // Adjust width as needed
+// const StyledDonationCard = styled('div')(({ theme }) => ({
+// 	display: 'flex',
+// 	flexDirection: 'column',
+// 	alignItems: 'center',
+// 	padding: theme.spacing(3),
+// 	margin: theme.spacing(2),
+// 	border: `1px solid ${theme.palette.divider}`,
+// 	borderRadius: theme.shape.borderRadius,
+// 	maxWidth: '400px', // Adjust width as needed
 
-	'&:hover': {
-		// Add hover effect (optional)
-		backgroundColor: theme.palette.background,
-		cursor: 'pointer'
-	}
-}));
+// 	'&:hover': {
+// 		// Add hover effect (optional)
+// 		backgroundColor: theme.palette.background,
+// 		cursor: 'pointer'
+// 	}
+// }));
 
 function Welcome() {
 	const navigate = useNavigate();
-	const theme = themeModal();
-	const dispatch = useDispatch();
 
-	const [donations, setDonations] = React.useState([]);
+	const [donations, setDonations] = useState([]);
 	const userInfo = useSelector((state: any) => state.user.userInfo);
-
-	useEffect(() => {
-		checkUserInLocal();
-	}, []);
-
-	const checkUserInLocal = () => {
-		try {
-			const user = localStorage.getItem('userInfo');
-			if (user != null) dispatch(setUserInfo(JSON.parse(user || '')));
-		} catch (error) {
-			console.log(error);
-		}
-	};
+	console.log(donations);
 
 	// Fetch user donations on component mount
-	React.useEffect(() => {
+	useEffect(() => {
 		const fetchDonations = async () => {
 			try {
 				const response = await getDonationsByUser();

@@ -1,8 +1,6 @@
-import { createTheme, TextField, ThemeProvider } from '@mui/material';
-import themeModal from '../theme/theme';
+import { TextField } from '@mui/material';
 
 const CustomTextField = ({ id, label, value, setValue }: any) => {
-	const theme = themeModal();
 
 	const handleChange = (event: any) => {
 		setValue(event.target.value);

@@ -1,5 +1,3 @@
-import { Contrast } from '@mui/icons-material';
-
 const lightColor = {
 	main: '#228B22',
 	light: '#2f9e2f',

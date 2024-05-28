@@ -1,19 +1,15 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
 import { useState } from 'react';
-import themeModal from '../theme/theme';
 import CustomTextField from '../components/CustomTextField';
 import CustomButton from '../components/CustomButton';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../services/authApi';
-import { useDispatch } from 'react-redux';
 import { Response, UserInfo } from '../interface/response';
 import IconTextField from '../components/IconTextField';
 import Layout from '../components/Layout';
 
 function Register() {
-	const theme = themeModal();
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
 
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -21,7 +17,6 @@ function Register() {
 	const [phone, setPhone] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
-	const [secure, setSecure] = useState(true);
 	const [isRegistering, setIsRegistering] = useState(false);
 
 	const validateUser = (user: UserInfo) => {

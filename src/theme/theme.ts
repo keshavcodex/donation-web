@@ -1,3 +1,5 @@
+import { Contrast } from '@mui/icons-material';
+
 const lightColor = {
 	main: '#228B22',
 	light: '#2f9e2f',
@@ -7,14 +9,14 @@ const lightColor = {
 };
 
 const darkColor = {
-	main: '#fff',
+	main: '#031c09',
 	light: '#241300',
 	dark: '#000',
 	fullColor: '#000',
 	fullColorInverse: '#fff'
 };
 const themeModal = () => {
-	const isDarkMode = false;
+	const isDarkMode = true;
 
 	const neutralColor = {
 		yellow: 'yellow',

@@ -13,15 +13,18 @@ import { useSelector } from 'react-redux';
 import Welcome from '../screens/welcome';
 import Error404 from '../screens/Error404';
 import OtpVerification from '../screens/OtpVerification';
+import { Box } from '@mui/material';
+import MenuAppBar from '../components/MenuAppBar';
+import Profile from '../screens/Profile';
 
 function NavigationPage() {
-	const isAuthenticated = useSelector((state: any) => state.user.userInfo);
 
 	return (
 		<Router>
 			<Routes>
 				<Route path='/' element={<Home />} />
 				<Route path='/welcome' element={<Welcome />} />
+				<Route path='/profile' element={<Profile />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/register' element={<Register />} />
 				<Route path='/otp' element={<OtpVerification />} />

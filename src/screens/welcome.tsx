@@ -5,14 +5,14 @@ import userAvatar from '../images/user-avatar.png';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from '../components/CustomButton';
 import { getDonationsByUser } from '../services/apiServices'; // Assuming a service to fetch user donations
-import gradientBackground from '../theme/gradient';
 import themeModal from '../theme/theme';
 import { useDispatch, useSelector } from 'react-redux';
 import { toTitleCase } from '../utils/helper';
 import { setUserInfo } from '../store/store';
+import Layout from '../components/Layout';
 
 const StyledWelcomeSection = styled('section')(({ theme }) => ({
-	backgroundColor: "#a4dba4",
+	backgroundColor: '#a4dba4',
 	padding: theme.spacing(4),
 	borderRadius: theme.shape.borderRadius,
 	display: 'flex',
@@ -74,23 +74,7 @@ function Welcome() {
 	}, []);
 
 	return (
-		<Box
-			sx={{
-				backgroundImage: gradientBackground, // Set background gradient
-				backgroundSize: 'cover',
-				backgroundRepeat: 'no-repeat',
-				minHeight: '100vh'
-			}}
-		>
-			<Box sx={{ display: 'flex', justifyContent: 'start', p: 2 }}>
-				<CustomButton
-					textColor={theme.main}
-					variant='outlined'
-					onClick={() => navigate('/')}
-				>
-					Home
-				</CustomButton>
-			</Box>
+		<Layout>
 			<Box
 				sx={{
 					display: 'flex',
@@ -177,7 +161,7 @@ function Welcome() {
 					</Grid>
 				</Container>
 			</Box>
-		</Box>
+		</Layout>
 	);
 }
 

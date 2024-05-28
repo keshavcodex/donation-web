@@ -4,11 +4,11 @@ import themeModal from '../theme/theme';
 import CustomTextField from '../components/CustomTextField';
 import CustomButton from '../components/CustomButton';
 import { useNavigate } from 'react-router-dom';
-import gradientBackground from '../theme/gradient';
 import { register } from '../services/authApi';
 import { useDispatch } from 'react-redux';
 import { Response, UserInfo } from '../interface/response';
 import IconTextField from '../components/IconTextField';
+import Layout from '../components/Layout';
 
 function Register() {
 	const theme = themeModal();
@@ -79,24 +79,8 @@ function Register() {
 	};
 
 	return (
-		<Box
-			sx={{
-				backgroundImage: gradientBackground,
-				backgroundSize: 'cover',
-				backgroundRepeat: 'no-repeat',
-				minHeight: '100vh'
-			}}
-		>
-			<Box sx={{ display: 'flex', justifyContent: 'start', p: 2 }}>
-				<CustomButton
-					textColor={theme.main}
-					variant='outlined'
-					onClick={() => navigate('/')}
-				>
-					Home
-				</CustomButton>
-			</Box>
-			<Box component='form' noValidate autoComplete='off'>
+		<Layout>
+			<Box mt={2} component='form' noValidate autoComplete='off'>
 				<Typography sx={{ fontFamily: 'monospace', fontSize: 20 }}>
 					Register to donation app
 				</Typography>
@@ -112,32 +96,38 @@ function Register() {
 					>
 						<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
 							<CustomTextField
+								id={'First Name'}
 								label={'First Name'}
 								value={firstName}
 								setValue={setFirstName}
 							/>
 							<CustomTextField
+								id={'Last Name'}
 								label={'Last Name'}
 								value={lastName}
 								setValue={setLastName}
 							/>
 						</Box>
 						<CustomTextField
+							id={'Phone'}
 							label={'Phone'}
 							value={phone}
 							setValue={setPhone}
 						/>
 						<CustomTextField
+							id={'Email'}
 							label={'Email'}
 							value={email}
 							setValue={setEmail}
 						/>
 						<IconTextField
+							id={'Password'}
 							label={'Password'}
 							value={password}
 							setValue={setPassword}
 						/>
 						<IconTextField
+							id={'Confirm Password'}
 							label={'Confirm Password'}
 							value={confirmPassword}
 							setValue={setConfirmPassword}
@@ -175,7 +165,7 @@ function Register() {
 					</Typography>
 				</Box>
 			</Box>
-		</Box>
+		</Layout>
 	);
 }
 

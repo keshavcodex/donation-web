@@ -1,19 +1,13 @@
-import {
-	Box,
-	Button,
-	CircularProgress,
-	TextField,
-	Typography
-} from '@mui/material';
+import { Box, CircularProgress, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import themeModal from '../theme/theme';
 import CustomTextField from '../components/CustomTextField';
 import CustomButton from '../components/CustomButton';
 import { useNavigate } from 'react-router-dom';
-import gradientBackground from '../theme/gradient';
 import { login } from '../services/authApi';
 import { useDispatch } from 'react-redux';
 import { setUserInfo } from '../store/store';
+import Layout from '../components/Layout';
 
 function Login() {
 	const theme = themeModal();
@@ -56,24 +50,8 @@ function Login() {
 	};
 
 	return (
-		<Box
-			sx={{
-				backgroundImage: gradientBackground, // Set background gradient
-				backgroundSize: 'cover',
-				backgroundRepeat: 'no-repeat',
-				minHeight: '100vh'
-			}}
-		>
-			<Box sx={{ display: 'flex', justifyContent: 'start', p: 2 }}>
-				<CustomButton
-					textColor={theme.main}
-					variant='outlined'
-					onClick={() => navigate('/')}
-				>
-					Home
-				</CustomButton>
-			</Box>
-			<Box component='form' noValidate autoComplete='off'>
+		<Layout>
+			<Box mt={2} component='form' noValidate autoComplete='off'>
 				<Typography sx={{ fontFamily: 'monospace', fontSize: 20 }}>
 					Login to donation app
 				</Typography>
@@ -93,18 +71,20 @@ function Login() {
 						}}
 					>
 						<CustomTextField
+							id={'email'}
 							label={'Email'}
 							value={email}
 							setValue={setEmail}
 						/>
 						<CustomTextField
+							id={'Password'}
 							label={'Password'}
 							value={password}
 							setValue={setPassword}
 						/>
 						{isLogging ? (
 							<Box>
-								<CircularProgress color='success' />
+								<CircularProgress />
 							</Box>
 						) : (
 							<CustomButton onClick={handleLogin}>Login</CustomButton>
@@ -135,7 +115,7 @@ function Login() {
 					</Typography>
 				</Box>
 			</Box>
-		</Box>
+		</Layout>
 	);
 }
 

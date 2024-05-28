@@ -39,7 +39,7 @@ function Home() {
 					flexDirection: 'column',
 					alignItems: 'center',
 					justifyContent: 'center',
-					height: '70vh'
+					minHeight: '70vh'
 				}}
 			>
 				<Container maxWidth='lg'>
